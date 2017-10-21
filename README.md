@@ -7,5 +7,5 @@ These are a few codes to grab or handle some kinds of data form wiki.
 - The main package to extract useful info from the dumps of wiki data is `gensim.corpora.wikicorpus` and the way of getting data in a better format from chinese corpus was designed by [苏剑林](http://spaces.ac.cn/archives/4176/).
 
 ## More
-- the task is easy so some small useful packages are enough.
+- The task is easy so some small useful packages are enough.
 - The proxy ips in the code are private and invalid now.
