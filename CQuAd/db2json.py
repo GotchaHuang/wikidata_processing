@@ -7,7 +7,7 @@ import re
 from tqdm import tqdm
 
 title_patt = re.compile('(\D+)\d*')
-with open("../aaa/zxcdsa5542_result.json", encoding="utf-8") as f:
+with open("../../aaa/result.json", encoding="utf-8") as f:
     text = f.read()
 json_obj = json.loads(text)
 
@@ -20,15 +20,15 @@ for obj in process:
     # initial
     answer = dict(answer_start="", text="")
     answers = []
-    qa = dict(answers=answers, id="", question="")
+    qa = dict(answers=answers, question="", id="")
     qas = []
     paragraph = dict(context="", qas=qas)
     paragraphs = []
-    data = dict(paragraphs=paragraphs, title="")
+    data = dict(title="", paragraphs=paragraphs)
 
     # format
-    answer['answer_start'] = obj['answer'][0]
-    answer['text'] = obj['answer']
+    ans = obj['answer']
+    answer['text'] = ans
     for j in range(3):
         answers.append(answer)
 
@@ -40,6 +40,8 @@ for obj in process:
     context = obj['paragraph']
     paragraph['context'] = context
     paragraph['qas'] = qas
+
+    answer['answer_start'] = context.find(ans)
 
     title_str = title_patt.findall(obj['paragraph_id'])
     if not title_str:
@@ -72,6 +74,6 @@ for obj in process:
 
 format_json['data'] = datas
 result = json.dumps(format_json, indent=2, ensure_ascii=False)
-with open('../aaa/zxcdsa5542_format_result.json', 'w', encoding='utf-8') as f:
+with open('../../aaa/format_result.json', 'w', encoding='utf-8') as f:
     f.write(result)
 
