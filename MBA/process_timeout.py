@@ -45,20 +45,24 @@ def re_get(item_name):
         print('item ' + item_name + ' timeout')
         return
     index = item_name.find('/')
+
     if index != -1:
         item_name = item_name[:index] + item_name[index+1:]
+
     while True:
         index = item_name.find('"')
         if index != -1:
             item_name = item_name[:index] + item_name[index+1:]
         else:
             break
+
     while True:
         index = item_name.find("'")
         if index != -1:
             item_name = item_name[:index] + item_name[index+1:]
         else:
             break
+
     filename = './MBA_' + dir_name + '/' + item_name + '.html'
     new_file = open(filename, 'w', encoding='utf-8')
     new_file.write(item_response.text)
@@ -77,6 +81,7 @@ def category_get(category):
     sub_soup = BeautifulSoup(subtitle_response.text, 'lxml')
     subtitle_response.close()
     content = sub_soup.find(id='bodyContent')
+
     if content:
         lis = content.find_all('li')
         for li in lis:

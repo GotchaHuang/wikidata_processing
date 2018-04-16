@@ -79,6 +79,7 @@ def get_item(subtitle):
     sub_soup = BeautifulSoup(subtitle_response.text, 'lxml')
     subtitle_response.close()
     content = sub_soup.find(id='bodyContent')
+
     if content:
         lis = content.find_all('li')
         for li in lis:
@@ -102,12 +103,14 @@ def get_html(item_name):
     index = item_name.find('/')
     if index != -1:
         item_name = item_name[:index] + item_name[index+1:]
+
     while True:
         index = item_name.find('"')
         if index != -1:
             item_name = item_name[:index] + item_name[index+1:]
         else:
             break
+
     while True:
         index = item_name.find("'")
         if index != -1:

@@ -7,7 +7,8 @@ import os
 
 pattern = re.compile('\[.*?\]')
 sent_patt = re.compile('.*?。')
-dir = '../cutted-paras'
+dir = 'E:/NLP/CQuDAdata/separate-paras'
+
 
 def handle(path):
     count = 1
@@ -25,15 +26,15 @@ def handle(path):
             new_para_path = dir + path[index:-4] + str(count) + '.txt'
             new_file = open(new_para_path, 'w', encoding='utf-8')
             new_file.write(new_para)
-            print(new_para_path + 'finished. ' + 'len: ' + str(len(new_para)))
+            print(new_para_path + ' finished. ' + 'len: ' + str(len(new_para)))
             count += 1
             new_para = ''
 
 
 def main():
-    for _, __, files in os.walk('E:/Mine/NLP小组/paras'):
+    for _, __, files in os.walk('E:/NLP/CQuDAdata/paras'):
         for file in files:
-            file_name = '../paras/' + file
+            file_name = 'E:/NLP/CQuDAdata/paras/' + file
             handle(file_name)
 
 

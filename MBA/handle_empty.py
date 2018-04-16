@@ -42,6 +42,7 @@ def handle(dir):
             item_name = f[:index]
             filename = os.path.join(root, f)
             size = os.path.getsize(filename)
+
             if size == 0:
                 item_url = 'http://wiki.mbalib.com/wiki/' + item_name
                 proxy = random.choice(proxies)
@@ -53,12 +54,14 @@ def handle(dir):
                     print('item ' + item_name + ' timeout')
                     continue
                 cont = soup.find(id='content')
+
                 if cont:
                     h = cont.find('h1', recursive=False)
                     if h.get_text() == '首页':
                         os.remove(filename)
                         print(item_name + ' removed')
                         continue
+
                 new_file = open(filename, 'w', encoding='utf-8')
                 new_file.write(item_response.text)
                 print(item_name + ' reloaded')
